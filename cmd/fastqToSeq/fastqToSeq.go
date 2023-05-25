@@ -15,7 +15,7 @@ import (
 
 var _ = flag.BoolP("help", "h", false, "show parameters")
 var _ = flag.StringP("pattern", "p", "*.fastq", "enter path and pattern")
-var _ = flag.StringP("out", "o", "read1.txt", "fastq sequence file")
+var _ = flag.StringP("out", "o", "read.txt", "fastq sequence file")
 
 func main() {
 	CommaP := message.NewPrinter(message.MatchLanguage("kr"))
@@ -45,7 +45,7 @@ func main() {
 		return
 	}
 
-	outHandle, err := os.Create("out.txt")
+	outHandle, err := os.Create(viper.GetString("out"))
 	if err != nil {
 		log.Printf("%v", err)
 		return
