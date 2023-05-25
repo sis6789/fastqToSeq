@@ -45,7 +45,7 @@ func main() {
 		return
 	}
 
-	outHandle, err := os.Create("out")
+	outHandle, err := os.Create("out.txt")
 	if err != nil {
 		log.Printf("%v", err)
 		return
