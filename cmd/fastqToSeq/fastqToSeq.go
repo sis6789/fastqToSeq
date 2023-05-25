@@ -14,14 +14,12 @@ import (
 )
 
 var _ = flag.BoolP("help", "h", false, "show parameters")
-var _ = flag.StringP("pattern", "p", "*.fastq", "enter path and pattern")
 var _ = flag.StringP("out", "o", "read.txt", "fastq sequence file")
+var _ = flag.StringP("pattern", "p", "*.fastq", "enter path and pattern")
 
 func main() {
 	CommaP := message.NewPrinter(message.MatchLanguage("kr"))
 	var err error
-	wd, err := os.Getwd()
-	log.Printf("start %v", wd)
 
 	{
 		// 명령줄 flag를 설정한다.
@@ -45,11 +43,14 @@ func main() {
 		return
 	}
 
+	wd, err := os.Getwd()
+	log.Printf("start %v %v", wd, viper.GetString("out"))
 	outHandle, err := os.Create(viper.GetString("out"))
 	if err != nil {
 		log.Printf("%v", err)
 		return
 	}
+
 	defer func() {
 		_ = outHandle.Close()
 	}()
